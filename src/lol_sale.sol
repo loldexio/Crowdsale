@@ -1,4 +1,6 @@
-// (C) block.one all rights reserved
+// (C) LoLdex technology all rights reserved
+// LOLDex Crowdsale follows the EOS Crowdsale model.
+//https://etherscan.io/address/0xd0a6e6c54dbc68db5db3a091b171a77407ff7ccf
 
 pragma solidity ^0.4.11;
 
@@ -8,7 +10,7 @@ import "ds-math/math.sol";
 
 import "ds-token/token.sol";
 
-contract EOSSale is DSAuth, DSExec, DSMath {
+contract LOLSale is DSAuth, DSExec, DSMath {
     DSToken  public  LOL;                  // The LOL token itself
     uint128  public  totalSupply;          // Total LOL amount created
     uint128  public  foundersAllocation;   // Amount given to founders
@@ -151,7 +153,7 @@ contract EOSSale is DSAuth, DSExec, DSMath {
 
     // Value should be a public key.  Read full key import policy.
     // Manually registering requires a base58
-    // encoded using the STEEM, BTS, or EOS public key format.
+    // encoded using the STEEM, BTS, or LOL public key format.
     function register(string key) {
         assert(today() <=  numberOfDays + 1);
         assert(bytes(key).length <= 64);
