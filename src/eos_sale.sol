@@ -9,8 +9,8 @@ import "ds-math/math.sol";
 import "ds-token/token.sol";
 
 contract EOSSale is DSAuth, DSExec, DSMath {
-    DSToken  public  LOL;                  // The EOS token itself
-    uint128  public  totalSupply;          // Total EOS amount created
+    DSToken  public  LOL;                  // The LOL token itself
+    uint128  public  totalSupply;          // Total LOL amount created
     uint128  public  foundersAllocation;   // Amount given to founders
     string   public  foundersKey;          // Public key of founders
 
