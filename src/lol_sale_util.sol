@@ -1,6 +1,6 @@
 pragma solidity ^0.4.11;
 
-import "./eos_sale.sol";
+import "./lol_sale.sol";
 
 contract EOSSaleUtil {
     EOSSale  public  sale;

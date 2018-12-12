@@ -7,7 +7,7 @@ import "ds-guard/guard.sol";
 
 import "gnosis-multisig/MultiSigWallet.sol";
 
-import "./eos_sale.sol";
+import "./lol_sale.sol";
 
 contract TestUser is DSExec {
     TestableEOSSale sale;
