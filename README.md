@@ -1,3 +1,1 @@
-The Web Interface is being updated... 
-
-https://etherscan.io/address/0xd0a6e6c54dbc68db5db3a091b171a77407ff7ccf
+LoLDex public auction smart contract
