@@ -382,7 +382,7 @@ contract LOLSaleTest is DSTest, DSExec {
     }
 }
 
-contract EOSSalePreInitTests is DSTest {
+contract LOLSalePreInitTests is DSTest {
     TestableEOSSale  sale;
     TestUser         user1;
 
@@ -400,10 +400,10 @@ contract EOSSalePreInitTests is DSTest {
 
     // Ensure that initialize fails if the token has other authorized callers
     function testFailTokenAuthority() {
-        DSToken EOS = new DSToken("EOS");
-        EOS.setAuthority(new DSGuard());
-        EOS.setOwner(sale);
-        sale.initialize(EOS);
+        DSToken LOL = new DSToken("LOL");
+        LOL.setAuthority(new DSGuard());
+        LOL.setOwner(sale);
+        sale.initialize(LOL);
     }
 }
 
