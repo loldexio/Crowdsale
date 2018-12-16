@@ -421,7 +421,7 @@ contract MultisigUser {
 }
 
 contract MultisigTests is DSTest {
-    TestableEOSSale  sale;
+    TestableLOLSale  sale;
     MultisigUser     user1;
     MultisigUser     user2;
     MultiSigWallet   multisig;
@@ -429,7 +429,7 @@ contract MultisigTests is DSTest {
     function setUp() {
         string memory x = new string(1);
 
-        sale = new TestableEOSSale(
+        sale = new TestableLOLSale(
             5, 156.25 ether, now, block.timestamp + 1 days, 10 ether, x
         );
 
