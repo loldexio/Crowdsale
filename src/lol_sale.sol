@@ -60,11 +60,11 @@ contract LOLSale is DSAuth, DSExec, DSMath {
         assert(openTime < startTime);
     }
 
-    function initialize(DSToken eos) auth {
+    function initialize(DSToken lol) auth {
         assert(address(EOS) == address(0));
-        assert(eos.owner() == address(this));
-        assert(eos.authority() == DSAuthority(0));
-        assert(eos.totalSupply() == 0);
+        assert(lol.owner() == address(this));
+        assert(lol.authority() == DSAuthority(0));
+        assert(lol.totalSupply() == 0);
 
         LOL = lol;
         LOL.mint(totalSupply);
