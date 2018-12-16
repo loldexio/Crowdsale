@@ -232,22 +232,22 @@ contract LOLSaleTest is DSTest, DSExec {
 
     function testMultiUser() {
         nextRound(1 ether, 1 ether, 0);
-        assertEq(EOS.balanceOf(this), 15.625 ether);
-        assertEq(EOS.balanceOf(user1), 15.625 ether);
+        assertEq(LOL.balanceOf(this), 15.625 ether);
+        assertEq(LOL.balanceOf(user1), 15.625 ether);
     }
 
     function testMultiUserAsymmetricBid() {
         nextRound(1 ether, 9 ether, 0);
-        assertEq(EOS.balanceOf(this), 3.125 ether);
-        assertEq(EOS.balanceOf(user1), 28.125 ether);
+        assertEq(LOL.balanceOf(this), 3.125 ether);
+        assertEq(LOL.balanceOf(user1), 28.125 ether);
     }
 
     // is this an issue?
     function testRepeatingDecimalRoundUp() {
         nextRound(1 ether, 1 ether, 1 ether);
-        assertEq(EOS.balanceOf(this), 10416666666666666667);
-        assertEq(EOS.balanceOf(user1), 10416666666666666667);
-        assertEq(EOS.balanceOf(user2), 10416666666666666667);
+        assertEq(LOL.balanceOf(this), 10416666666666666667);
+        assertEq(LOL.balanceOf(user1), 10416666666666666667);
+        assertEq(LOL.balanceOf(user2), 10416666666666666667);
     }
 
     function testRepeatingDecimalRoundDown() {
@@ -294,8 +294,8 @@ contract LOLSaleTest is DSTest, DSExec {
         nextRound(1 ether, 1 ether, 0);
         nextRound(1 ether, 1 ether, 0);
         nextRound(1 ether, 1 ether, 0);
-        assertEq(EOS.balanceOf(this), 73.125 ether);
-        assertEq(EOS.balanceOf(user1), 73.125 ether);
+        assertEq(LOL.balanceOf(this), 73.125 ether);
+        assertEq(LOL.balanceOf(user1), 73.125 ether);
         addTime();
 
         owner.doCollect();
@@ -311,9 +311,9 @@ contract LOLSaleTest is DSTest, DSExec {
         nextRound(1 ether, 12 ether, 12 ether);
         nextRound(12 ether, 1 ether, 12 ether);
         nextRound(12 ether, 12 ether, 1 ether);
-        assertEq(EOS.balanceOf(this), 70.675 ether);
-        assertEq(EOS.balanceOf(user1), 41.075 ether);
-        assertEq(EOS.balanceOf(user2), 34.5 ether);
+        assertEq(LOL.balanceOf(this), 70.675 ether);
+        assertEq(LOL.balanceOf(user1), 41.075 ether);
+        assertEq(LOL.balanceOf(user2), 34.5 ether);
         addTime();
 
         owner.doCollect();
