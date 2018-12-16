@@ -34,7 +34,7 @@ contract LOLSale is DSAuth, DSExec, DSMath {
     event LogCollect  (uint amount);
     event LogFreeze   ();
 
-    function EOSSale(
+    function LOLSale(
         uint     _numberOfDays,
         uint128  _totalSupply,
         uint     _openTime,
@@ -61,7 +61,7 @@ contract LOLSale is DSAuth, DSExec, DSMath {
     }
 
     function initialize(DSToken lol) auth {
-        assert(address(EOS) == address(0));
+        assert(address(LOL) == address(0));
         assert(lol.owner() == address(this));
         assert(lol.authority() == DSAuthority(0));
         assert(lol.totalSupply() == 0);
