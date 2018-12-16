@@ -40,9 +40,9 @@ contract TestUser is DSExec {
 }
 
 contract TestOwner {
-    TestableEOSSale sale;
+    TestableLOLSale sale;
 
-    function TestOwner(TestableEOSSale sale_) {
+    function TestOwner(TestableLOLSale sale_) {
         sale = sale_;
     }
 
@@ -53,10 +53,10 @@ contract TestOwner {
     }
 }
 
-contract TestableLOLSale is EOSSale {
+contract TestableLOLSale is LOLSale {
     function TestableLOLSale(
         uint n, uint128 t, uint o, uint s, uint128 a, string k
-    ) EOSSale(n, t, o, s, a, k) {}
+    ) LOLSale(n, t, o, s, a, k) {}
 
     uint public localTime;
 
@@ -71,7 +71,7 @@ contract TestableLOLSale is EOSSale {
 
 contract LOLSaleTest is DSTest, DSExec {
     TestableLOLSale  sale;
-    DSToken          EOS;
+    DSToken          LOL;
     DSGuard          guard;
     TestUser         user1;
     TestUser         user2;
@@ -255,8 +255,8 @@ contract LOLSaleTest is DSTest, DSExec {
         window++;
 
         nextRound(5 ether, 1 ether, 0);
-        assertEq(EOS.balanceOf(this), 19166666666666666665);
-        assertEq(EOS.balanceOf(user1), 3833333333333333333);
+        assertEq(LOL.balanceOf(this), 19166666666666666665);
+        assertEq(LOL.balanceOf(user1), 3833333333333333333);
     }
 
     function testFreeze() {
@@ -266,7 +266,7 @@ contract LOLSaleTest is DSTest, DSExec {
         nextRound(1 ether, 0, 0);
         nextRound(1 ether, 0, 0);
         nextRound(1 ether, 0, 0);
-        assertEq(EOS.balanceOf(this), 146.25 ether);
+        assertEq(LOL.balanceOf(this), 146.25 ether);
 
         // one extra day to trade
         addTime();
@@ -281,7 +281,7 @@ contract LOLSaleTest is DSTest, DSExec {
         nextRound(1 ether, 0, 0);
         nextRound(1 ether, 0, 0);
         nextRound(1 ether, 0, 0);
-        assertEq(EOS.balanceOf(this), 146.25 ether);
+        assertEq(LOL.balanceOf(this), 146.25 ether);
 
         owner.doCollect();
         assertEq(owner.balance, 6 ether);
@@ -383,13 +383,13 @@ contract LOLSaleTest is DSTest, DSExec {
 }
 
 contract LOLSalePreInitTests is DSTest {
-    TestableEOSSale  sale;
+    TestableLOLSale  sale;
     TestUser         user1;
 
     function setUp() {
         string memory x = new string(1);
 
-        sale = new TestableEOSSale(
+        sale = new TestableLOLSale(
             5, 156.25 ether, now, block.timestamp + 1 days, 10 ether, x
         );
 

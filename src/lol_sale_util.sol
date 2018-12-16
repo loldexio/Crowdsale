@@ -3,7 +3,7 @@ pragma solidity ^0.4.11;
 import "./lol_sale.sol";
 
 contract LOLSaleUtil {
-    EOSSale  public  sale;
+    LOLSale  public  sale;
 
     function LOLSaleUtil(LOLSale _sale) {
         sale = _sale;
