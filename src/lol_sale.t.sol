@@ -10,9 +10,9 @@ import "gnosis-multisig/MultiSigWallet.sol";
 import "./lol_sale.sol";
 
 contract TestUser is DSExec {
-    TestableEOSSale sale;
+    TestableLOLSale sale;
 
-    function TestUser(TestableEOSSale sale_) {
+    function TestUser(TestableLOLSale sale_) {
         sale = sale_;
     }
 
@@ -53,8 +53,8 @@ contract TestOwner {
     }
 }
 
-contract TestableEOSSale is EOSSale {
-    function TestableEOSSale(
+contract TestableLOLSale is EOSSale {
+    function TestableLOLSale(
         uint n, uint128 t, uint o, uint s, uint128 a, string k
     ) EOSSale(n, t, o, s, a, k) {}
 
@@ -69,8 +69,8 @@ contract TestableEOSSale is EOSSale {
     }
 }
 
-contract EOSSaleTest is DSTest, DSExec {
-    TestableEOSSale  sale;
+contract LOLSaleTest is DSTest, DSExec {
+    TestableLOLSale  sale;
     DSToken          EOS;
     DSGuard          guard;
     TestUser         user1;
@@ -81,15 +81,15 @@ contract EOSSaleTest is DSTest, DSExec {
     function setUp() {
         string memory x = new string(1);
 
-        EOS = new DSToken("EOS");
+        LOL = new DSToken("LOL");
         window = 0;
 
-        sale = new TestableEOSSale(
+        sale = new TestableLOLSale(
             5, 156.25 ether, now, block.timestamp + 1 days, 10 ether, x
         );
 
-        EOS.setOwner(sale);
-        sale.initialize(EOS);
+        LOL.setOwner(sale);
+        sale.initialize(LOL);
 
         sale.addTime(now + 1);
 
@@ -126,7 +126,7 @@ contract EOSSaleTest is DSTest, DSExec {
 
     function testFailBuyBeforeOpen() {
         string memory x = new string(1);
-        sale = new TestableEOSSale(
+        sale = new TestableLOLSale(
             5, 156.25 ether, now + 1, block.timestamp + 1 days, 10 ether, x
         );
         sale.addTime(now);
@@ -169,20 +169,20 @@ contract EOSSaleTest is DSTest, DSExec {
         sale.buy.value(1 ether)();
         sale.addTime(1 days);
         sale.claim(0);
-        assertEq(EOS.balanceOf(this), 31.25 ether);
+        assertEq(LOL.balanceOf(this), 31.25 ether);
     }
 
     function testBuyFirstAndSecondDay() {
         sale.buy.value(1 ether)();
         sale.addTime(1 days);
         sale.claim(0);
-        assertEq(EOS.balanceOf(this), 31.25 ether);
+        assertEq(LOL.balanceOf(this), 31.25 ether);
 
         sale.buy.value(1 ether)();
         sale.addTime(1 days);
         sale.claim(1);
         // 23 tokens issued per day after first day
-        assertEq(EOS.balanceOf(this), 54.25 ether);
+        assertEq(LOL.balanceOf(this), 54.25 ether);
     }
 
     function testFailSaleOver() {
@@ -206,12 +206,12 @@ contract EOSSaleTest is DSTest, DSExec {
         nextRound(1 ether, 0, 0);
         nextRound(1 ether, 0, 0);
 
-        assertEq(EOS.balanceOf(this), 146.25 ether);
+        assertEq(LOL.balanceOf(this), 146.25 ether);
     }
 
     function testClaim() {
         nextRound(1 ether, 0, 0);
-        assertEq(EOS.balanceOf(this), 31.25 ether);
+        assertEq(LOL.balanceOf(this), 31.25 ether);
     }
 
     function testClaimZeroContribution() {
@@ -232,22 +232,22 @@ contract EOSSaleTest is DSTest, DSExec {
 
     function testMultiUser() {
         nextRound(1 ether, 1 ether, 0);
-        assertEq(EOS.balanceOf(this), 15.625 ether);
-        assertEq(EOS.balanceOf(user1), 15.625 ether);
+        assertEq(LOL.balanceOf(this), 15.625 ether);
+        assertEq(LOL.balanceOf(user1), 15.625 ether);
     }
 
     function testMultiUserAsymmetricBid() {
         nextRound(1 ether, 9 ether, 0);
-        assertEq(EOS.balanceOf(this), 3.125 ether);
-        assertEq(EOS.balanceOf(user1), 28.125 ether);
+        assertEq(LOL.balanceOf(this), 3.125 ether);
+        assertEq(LOL.balanceOf(user1), 28.125 ether);
     }
 
     // is this an issue?
     function testRepeatingDecimalRoundUp() {
         nextRound(1 ether, 1 ether, 1 ether);
-        assertEq(EOS.balanceOf(this), 10416666666666666667);
-        assertEq(EOS.balanceOf(user1), 10416666666666666667);
-        assertEq(EOS.balanceOf(user2), 10416666666666666667);
+        assertEq(LOL.balanceOf(this), 10416666666666666667);
+        assertEq(LOL.balanceOf(user1), 10416666666666666667);
+        assertEq(LOL.balanceOf(user2), 10416666666666666667);
     }
 
     function testRepeatingDecimalRoundDown() {
@@ -294,8 +294,8 @@ contract EOSSaleTest is DSTest, DSExec {
         nextRound(1 ether, 1 ether, 0);
         nextRound(1 ether, 1 ether, 0);
         nextRound(1 ether, 1 ether, 0);
-        assertEq(EOS.balanceOf(this), 73.125 ether);
-        assertEq(EOS.balanceOf(user1), 73.125 ether);
+        assertEq(LOL.balanceOf(this), 73.125 ether);
+        assertEq(LOL.balanceOf(user1), 73.125 ether);
         addTime();
 
         owner.doCollect();
@@ -311,9 +311,9 @@ contract EOSSaleTest is DSTest, DSExec {
         nextRound(1 ether, 12 ether, 12 ether);
         nextRound(12 ether, 1 ether, 12 ether);
         nextRound(12 ether, 12 ether, 1 ether);
-        assertEq(EOS.balanceOf(this), 70.675 ether);
-        assertEq(EOS.balanceOf(user1), 41.075 ether);
-        assertEq(EOS.balanceOf(user2), 34.5 ether);
+        assertEq(LOL.balanceOf(this), 70.675 ether);
+        assertEq(LOL.balanceOf(user1), 41.075 ether);
+        assertEq(LOL.balanceOf(user2), 34.5 ether);
         addTime();
 
         owner.doCollect();
@@ -332,11 +332,11 @@ contract EOSSaleTest is DSTest, DSExec {
 
         owner.doCollect();
 
-        assertEq(EOS.balanceOf(this), 0);
+        assertEq(LOL.balanceOf(this), 0);
 
         sale.claim(0);
 
-        assertEq(EOS.balanceOf(this), 31.25 ether);
+        assertEq(LOL.balanceOf(this), 31.25 ether);
     }
 
     function testClaimAll() {
@@ -347,10 +347,10 @@ contract EOSSaleTest is DSTest, DSExec {
         sale.buy.value(1 ether)();
         addTime();
 
-        assertEq(EOS.balanceOf(this), 0);
+        assertEq(LOL.balanceOf(this), 0);
 
         sale.claimAll();
-        assertEq(EOS.balanceOf(this), 77.25 ether);
+        assertEq(LOL.balanceOf(this), 77.25 ether);
     }
 
     function testClaimAllZeroContribution() {
@@ -362,10 +362,10 @@ contract EOSSaleTest is DSTest, DSExec {
         sale.buy.value(1 ether)();
         addTime();
 
-        assertEq(EOS.balanceOf(this), 0);
+        assertEq(LOL.balanceOf(this), 0);
 
         sale.claimAll();
-        assertEq(EOS.balanceOf(this), 77.25 ether);
+        assertEq(LOL.balanceOf(this), 77.25 ether);
     }
 
     function testRegister() {
@@ -382,7 +382,7 @@ contract EOSSaleTest is DSTest, DSExec {
     }
 }
 
-contract EOSSalePreInitTests is DSTest {
+contract LOLSalePreInitTests is DSTest {
     TestableEOSSale  sale;
     TestUser         user1;
 
@@ -400,10 +400,10 @@ contract EOSSalePreInitTests is DSTest {
 
     // Ensure that initialize fails if the token has other authorized callers
     function testFailTokenAuthority() {
-        DSToken EOS = new DSToken("EOS");
-        EOS.setAuthority(new DSGuard());
-        EOS.setOwner(sale);
-        sale.initialize(EOS);
+        DSToken LOL = new DSToken("LOL");
+        LOL.setAuthority(new DSGuard());
+        LOL.setOwner(sale);
+        sale.initialize(LOL);
     }
 }
 
@@ -421,7 +421,7 @@ contract MultisigUser {
 }
 
 contract MultisigTests is DSTest {
-    TestableEOSSale  sale;
+    TestableLOLSale  sale;
     MultisigUser     user1;
     MultisigUser     user2;
     MultiSigWallet   multisig;
@@ -429,7 +429,7 @@ contract MultisigTests is DSTest {
     function setUp() {
         string memory x = new string(1);
 
-        sale = new TestableEOSSale(
+        sale = new TestableLOLSale(
             5, 156.25 ether, now, block.timestamp + 1 days, 10 ether, x
         );
 

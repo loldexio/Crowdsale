@@ -66,11 +66,11 @@ contract LOLSale is DSAuth, DSExec, DSMath {
         assert(eos.authority() == DSAuthority(0));
         assert(eos.totalSupply() == 0);
 
-        EOS = eos;
-        EOS.mint(totalSupply);
+        LOL = lol;
+        LOL.mint(totalSupply);
 
         // Address 0xb1 is provably non-transferrable
-        EOS.push(0xb1, foundersAllocation);
+        LOL.push(0xb1, foundersAllocation);
         keys[0xb1] = foundersKey;
         LogRegister(0xb1, foundersKey);
     }
@@ -140,7 +140,7 @@ contract LOLSale is DSAuth, DSExec, DSMath {
         var reward     = wmul(price, userTotal);
 
         claimed[day][msg.sender] = true;
-        EOS.push(msg.sender, reward);
+        LOL.push(msg.sender, reward);
 
         LogClaim(day, msg.sender, reward);
     }
@@ -173,7 +173,7 @@ contract LOLSale is DSAuth, DSExec, DSMath {
     // Anyone can freeze the token 1 day after the sale ends
     function freeze() {
         assert(today() > numberOfDays + 1);
-        EOS.stop();
+        LOL.stop();
         LogFreeze();
     }
 }
