@@ -1,6 +1,7 @@
-                                                      LoLDex public auction smart contract.
+                                               LoLDex public auction smart contract.
 
-                                                              The LoLDEX Protocol
+                                                      The LoLDEX Protocol
+                                                      
 Fundamentally, LoLDEX believes exchanges should be peer to peer and done through smart contracts that seek out other smart contracts. This approach requires a unified trading protocol between the smart contracts and a supportive ecosystem. LoLDEX endeavors to develop a trading protocol that facilitates trading between smart contracts. Establishing our position as a provider of trading protocol, LOLDEX solution requires no account registration and therefore no AML/KYC as the onus is on the originator of the smart contract to ensure compliance either as seller’s or buyer’s end of the transaction.The protocol will consists the following required fields:
                       - Coin being traded
                       - Volume being traded
