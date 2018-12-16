@@ -69,8 +69,8 @@ contract TestableLOLSale is EOSSale {
     }
 }
 
-contract EOSSaleTest is DSTest, DSExec {
-    TestableEOSSale  sale;
+contract LOLSaleTest is DSTest, DSExec {
+    TestableLOLSale  sale;
     DSToken          EOS;
     DSGuard          guard;
     TestUser         user1;
@@ -81,15 +81,15 @@ contract EOSSaleTest is DSTest, DSExec {
     function setUp() {
         string memory x = new string(1);
 
-        EOS = new DSToken("EOS");
+        LOL = new DSToken("LOL");
         window = 0;
 
-        sale = new TestableEOSSale(
+        sale = new TestableLOLSale(
             5, 156.25 ether, now, block.timestamp + 1 days, 10 ether, x
         );
 
-        EOS.setOwner(sale);
-        sale.initialize(EOS);
+        LOL.setOwner(sale);
+        sale.initialize(LOL);
 
         sale.addTime(now + 1);
 
@@ -126,7 +126,7 @@ contract EOSSaleTest is DSTest, DSExec {
 
     function testFailBuyBeforeOpen() {
         string memory x = new string(1);
-        sale = new TestableEOSSale(
+        sale = new TestableLOLSale(
             5, 156.25 ether, now + 1, block.timestamp + 1 days, 10 ether, x
         );
         sale.addTime(now);
@@ -169,20 +169,20 @@ contract EOSSaleTest is DSTest, DSExec {
         sale.buy.value(1 ether)();
         sale.addTime(1 days);
         sale.claim(0);
-        assertEq(EOS.balanceOf(this), 31.25 ether);
+        assertEq(LOL.balanceOf(this), 31.25 ether);
     }
 
     function testBuyFirstAndSecondDay() {
         sale.buy.value(1 ether)();
         sale.addTime(1 days);
         sale.claim(0);
-        assertEq(EOS.balanceOf(this), 31.25 ether);
+        assertEq(LOL.balanceOf(this), 31.25 ether);
 
         sale.buy.value(1 ether)();
         sale.addTime(1 days);
         sale.claim(1);
         // 23 tokens issued per day after first day
-        assertEq(EOS.balanceOf(this), 54.25 ether);
+        assertEq(LOL.balanceOf(this), 54.25 ether);
     }
 
     function testFailSaleOver() {
@@ -206,12 +206,12 @@ contract EOSSaleTest is DSTest, DSExec {
         nextRound(1 ether, 0, 0);
         nextRound(1 ether, 0, 0);
 
-        assertEq(EOS.balanceOf(this), 146.25 ether);
+        assertEq(LOL.balanceOf(this), 146.25 ether);
     }
 
     function testClaim() {
         nextRound(1 ether, 0, 0);
-        assertEq(EOS.balanceOf(this), 31.25 ether);
+        assertEq(LOL.balanceOf(this), 31.25 ether);
     }
 
     function testClaimZeroContribution() {
