@@ -8,7 +8,7 @@ token=$(set -x; dapp create DSToken \
   $(seth --to-bytes32 $(seth --from-ascii EOS))
 )
 
-sale=$(set -x; dapp create EOSSale 7 \
+sale=$(set -x; dapp create LOLSale 7 \
   $(seth --to-uint256 $(seth --to-wei 1000000000 eth)) \
   $(date +%s -d '1 second') \
   $(date +%s -d '1 hour') \
