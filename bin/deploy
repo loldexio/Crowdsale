@@ -19,5 +19,5 @@ sale=$(set -x; dapp create EOSSale 7 \
 (set -x; seth send "$token" "setOwner(address)" "$sale")
 (set -x; seth send "$sale" "initialize(address)" "$token")
 
-echo "eos_token=$token"
-echo "eos_sale=$sale"
+echo "lol_token=$token"
+echo "lol_sale=$sale"
