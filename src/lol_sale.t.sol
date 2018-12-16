@@ -332,11 +332,11 @@ contract LOLSaleTest is DSTest, DSExec {
 
         owner.doCollect();
 
-        assertEq(EOS.balanceOf(this), 0);
+        assertEq(LOL.balanceOf(this), 0);
 
         sale.claim(0);
 
-        assertEq(EOS.balanceOf(this), 31.25 ether);
+        assertEq(LOL.balanceOf(this), 31.25 ether);
     }
 
     function testClaimAll() {
@@ -347,10 +347,10 @@ contract LOLSaleTest is DSTest, DSExec {
         sale.buy.value(1 ether)();
         addTime();
 
-        assertEq(EOS.balanceOf(this), 0);
+        assertEq(LOL.balanceOf(this), 0);
 
         sale.claimAll();
-        assertEq(EOS.balanceOf(this), 77.25 ether);
+        assertEq(LOL.balanceOf(this), 77.25 ether);
     }
 
     function testClaimAllZeroContribution() {
@@ -362,10 +362,10 @@ contract LOLSaleTest is DSTest, DSExec {
         sale.buy.value(1 ether)();
         addTime();
 
-        assertEq(EOS.balanceOf(this), 0);
+        assertEq(LOL.balanceOf(this), 0);
 
         sale.claimAll();
-        assertEq(EOS.balanceOf(this), 77.25 ether);
+        assertEq(LOL.balanceOf(this), 77.25 ether);
     }
 
     function testRegister() {
