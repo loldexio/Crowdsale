@@ -5,7 +5,7 @@ import "./lol_sale.sol";
 contract LOLSaleUtil {
     EOSSale  public  sale;
 
-    function LOLSaleUtil(EOSSale _sale) {
+    function LOLSaleUtil(LOLSale _sale) {
         sale = _sale;
     }
 
