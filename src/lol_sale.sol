@@ -14,6 +14,7 @@ contract LOLSale is DSAuth, DSExec, DSMath {
     DSToken  public  LOL;                  // The LOL token itself
     uint128  public  totalSupply;          // Total LOL amount created
     uint128  public  foundersAllocation;   // Amount given to founders
+    uint128  public  totalStageOneSale;    // Amount sold in stage one auction process
     string   public  foundersKey;          // Public key of founders
 
     uint     public  openTime;             // Time of window 0 opening
@@ -37,19 +38,23 @@ contract LOLSale is DSAuth, DSExec, DSMath {
     function LOLSale(
         uint     _numberOfDays,
         uint128  _totalSupply,
+        uint128  _totalStageOneSale,
         uint     _openTime,
         uint     _startTime,
         uint128  _foundersAllocation,
         string   _foundersKey
     ) {
-        numberOfDays       = _numberOfDays;
-        totalSupply        = _totalSupply;
+        numberOfDays       = _numberOfDays;         // 20days
+        totalSupply        = _totalSupply;          // 300000000
         openTime           = _openTime;
         startTime          = _startTime;
-        foundersAllocation = _foundersAllocation;
-        foundersKey        = _foundersKey;
+        foundersAllocation = _foundersAllocation;   // 0
+        foundersKey        = _foundersKey;          // Fearless
+        totalStageOneSale  = _totalStageOneSale;    // 10m
 
-        createFirstDay = wmul(totalSupply, 0.2 ether);
+        // createFirstDay = wmul(totalSupply, 0.2 ether);       //290m
+        createFirstDay = sub(totalSupply, totalStageOneSale);   //290m
+
         createPerDay = div(
             sub(sub(totalSupply, foundersAllocation), createFirstDay),
             numberOfDays
@@ -170,10 +175,10 @@ contract LOLSale is DSAuth, DSExec, DSMath {
         LogCollect(this.balance);
     }
 
-    // Anyone can freeze the token 1 day after the sale ends
-    function freeze() {
+    // Crowdsale owners can freeze the token 1 day after the sale ends
+    function freeze() auth {
         assert(today() > numberOfDays + 1);
         LOL.stop();
         LogFreeze();
-    }
+     }
 }
