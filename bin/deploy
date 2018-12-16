@@ -5,7 +5,7 @@ export DAPP_NO_SAVE=1
 export ETH_GAS=4000000
 
 token=$(set -x; dapp create DSToken \
-  $(seth --to-bytes32 $(seth --from-ascii EOS))
+  $(seth --to-bytes32 $(seth --from-ascii LOL))
 )
 
 sale=$(set -x; dapp create LOLSale 7 \
