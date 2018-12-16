@@ -9,4 +9,7 @@ Fundamentally, LoLDEX believes exchanges should be peer to peer and done through
                       - Wallet that created account
                       - Trading fee to the LoLDEX smart contract
                       - Any other trading fees or referral fees
-Please read more http://loldex.io/wp-content/uploads/2018/11/LoLDEXwhitepaper-v0.5.pdf
+Please read more 
+                http://loldex.io/wp-content/uploads/2018/11/LoLDEXwhitepaper-v0.5.pdf
+                
+                Join our telegram channel at https://t.me/loldexprotocol
