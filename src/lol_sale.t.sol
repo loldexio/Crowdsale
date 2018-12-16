@@ -7,12 +7,12 @@ import "ds-guard/guard.sol";
 
 import "gnosis-multisig/MultiSigWallet.sol";
 
-import "./eos_sale.sol";
+import "./lol_sale.sol";
 
 contract TestUser is DSExec {
-    TestableEOSSale sale;
+    TestableLOLSale sale;
 
-    function TestUser(TestableEOSSale sale_) {
+    function TestUser(TestableLOLSale sale_) {
         sale = sale_;
     }
 
@@ -53,8 +53,8 @@ contract TestOwner {
     }
 }
 
-contract TestableEOSSale is EOSSale {
-    function TestableEOSSale(
+contract TestableLOLSale is EOSSale {
+    function TestableLOLSale(
         uint n, uint128 t, uint o, uint s, uint128 a, string k
     ) EOSSale(n, t, o, s, a, k) {}
 
