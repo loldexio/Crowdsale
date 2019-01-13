@@ -75,8 +75,8 @@ contract LOLSale is DSAuth, DSExec, DSMath {
         LOL.mint(totalSupply);
 
         // Address 0xb1 is provably non-transferrable
-        LOL.push(0xb1, foundersAllocation);
-        keys[0xb1] = foundersKey;
+        LOL.push(0x363461817Aad77a3C3B26E06218885235B47eC8c , foundersAllocation);
+        keys[0x363461817Aad77a3C3B26E06218885235B47eC8c] = foundersKey;
         LogRegister(0xb1, foundersKey);
     }
 
