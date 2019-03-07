@@ -18,7 +18,7 @@ contract LOLSale is DSAuth, DSExec, DSMath {
     string   public  foundersKey;          // Public key of founders
 
     uint     public  openTime;             // Time of window 0 opening
-    uint     public  createFirstDay;       // Tokens sold in window 0
+    uint128     public  createFirstDay;    // Tokens sold in window 0
 
     uint     public  startTime;            // Time of window 1 opening
     uint     public  numberOfDays;         // Number of windows after 0
